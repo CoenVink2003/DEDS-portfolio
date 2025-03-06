@@ -1,0 +1,208 @@
+USE [warehouse]
+GO
+/****** Object:  Table [dbo].[country]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[country](
+	[country_code] [int] NULL,
+	[name] [nvarchar](100) NULL,
+	[language] [nvarchar](2) NULL,
+	[image] [nvarchar](255) NULL,
+	[currency] [nvarchar](255) NULL,
+	[territory_name] [nvarchar](255) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[date]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[date](
+	[date_code] [int] NULL,
+	[year] [int] NULL,
+	[month] [int] NULL,
+	[day] [int] NULL,
+	[hour] [int] NULL,
+	[minute] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[inventory_levels]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[inventory_levels](
+	[product_code] [int] NULL,
+	[date] [int] NULL,
+	[quantity] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[orderline]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[orderline](
+	[product_code] [int] NULL,
+	[quantity] [int] NULL,
+	[unit_cost] [decimal](10, 2) NULL,
+	[unit_price] [decimal](10, 2) NULL,
+	[retailer_code] [int] NULL,
+	[sales_branch_code] [int] NULL,
+	[sales_staff_code] [int] NULL,
+	[order_method] [nvarchar](50) NULL,
+	[retailer_contact_code] [int] NULL,
+	[order_date] [int] NULL,
+	[order_code] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[product]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[product](
+	[product_code] [int] NULL,
+	[producttype] [nvarchar](255) NULL,
+	[date] [int] NULL,
+	[attribute] [nvarchar](255) NULL,
+	[production_cost] [decimal](10, 2) NULL,
+	[margin] [int] NULL,
+	[image] [nvarchar](255) NULL,
+	[language] [nvarchar](2) NULL,
+	[name] [nvarchar](255) NULL,
+	[description] [text] NULL,
+	[product_line] [nvarchar](255) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[product_forecast]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[product_forecast](
+	[forecast_date] [int] NULL,
+	[product_code] [int] NULL,
+	[volume] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[retailer]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[retailer](
+	[retailer_code] [int] NULL,
+	[company_name] [nvarchar](255) NULL,
+	[hq_retailer_name] [nvarchar](255) NULL,
+	[retailer_type] [nvarchar](255) NULL,
+	[hq_address_1] [nvarchar](255) NULL,
+	[hq_address_2] [nvarchar](255) NULL,
+	[hq_city] [nvarchar](255) NULL,
+	[hq_region] [nvarchar](255) NULL,
+	[hq_country_code] [int] NULL,
+	[hq_phone] [nvarchar](15) NULL,
+	[hq_fax] [nvarchar](15) NULL,
+	[segment_language] [nvarchar](2) NULL,
+	[segment_name] [nvarchar](255) NULL,
+	[segment_description] [text] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[retailer_contact]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[retailer_contact](
+	[retailer_code] [int] NULL,
+	[full_name] [nvarchar](255) NULL,
+	[position] [nvarchar](255) NULL,
+	[extention] [int] NULL,
+	[fax] [nvarchar](15) NULL,
+	[email] [nvarchar](255) NULL,
+	[gender] [char](1) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[retailer_site]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[retailer_site](
+	[retailer_code] [int] NULL,
+	[address_1] [nvarchar](255) NULL,
+	[address_2] [nvarchar](255) NULL,
+	[city] [nvarchar](255) NULL,
+	[region] [nvarchar](255) NULL,
+	[country_code] [int] NULL,
+	[active] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[returned_item]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[returned_item](
+	[returned_date] [int] NULL,
+	[return_reason] [nvarchar](255) NULL,
+	[order_code] [int] NULL,
+	[product_code] [int] NULL,
+	[return_quantity] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[sales_branch]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[sales_branch](
+	[sales_branch_code] [int] NULL,
+	[address_1] [nvarchar](255) NULL,
+	[address_2] [nvarchar](255) NULL,
+	[city] [nvarchar](255) NULL,
+	[region] [nvarchar](255) NULL,
+	[country_code] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[sales_staff]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[sales_staff](
+	[full_name] [nvarchar](255) NULL,
+	[position] [nvarchar](255) NULL,
+	[phone] [nvarchar](15) NULL,
+	[extention] [int] NULL,
+	[fax] [nvarchar](15) NULL,
+	[email] [nchar](255) NULL,
+	[date_hired] [int] NULL,
+	[manager_code] [int] NULL,
+	[sales_branch_code] [int] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[satisfaction]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[satisfaction](
+	[date] [int] NULL,
+	[sales_staff_code] [int] NULL,
+	[satisfaction_type] [nvarchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[training]    Script Date: 6-3-2025 13:12:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[training](
+	[date] [int] NULL,
+	[sales_staff_code] [int] NULL,
+	[course_description] [text] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
